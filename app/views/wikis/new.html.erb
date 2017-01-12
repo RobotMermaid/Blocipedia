@@ -1,0 +1,15 @@
+<h1>New Wiki </h1>
+
+ <div class="row">
+   <div class="col-md-4">
+     <p>Guidelines for Wikis</p>
+     <ul>
+       <li>Make sure it talks about mermaids.</li>
+       <li>Refer to a Sci-fi show.</li>
+       <li>Don't be a bad sailor</li>
+     </ul>
+   </div>
+   <div class="col-md-8">
+     <%= render partial: 'form', locals: { user: @user, wiki: @wiki } %>
+   </div>
+ </div>

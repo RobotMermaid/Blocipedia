@@ -1,0 +1,28 @@
+<div class="leftspace">
+  <h1> This is the wiki index </h1>
+  <%= current_user.email %>
+  <br>
+  <%= user_signed_in? %>
+  <br>
+  <%= current_user %>
+  <br>
+  <%= current_user.id %>
+  <br>
+  <%= user_session %>
+  <br>
+  <div class="col-md-8">
+  <% @wikis.each do |wiki| %>
+    <div class="media">
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= link_to wiki.title, wiki %>
+        </h4>
+        <small>
+          <%= wiki.body %>
+        </small>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+</div>
