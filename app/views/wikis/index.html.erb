@@ -2,6 +2,14 @@
   <h1> This is the wiki index </h1>
   <%= current_user.email %>
   <br>
+  <p>The current time is: <%= Time.now %></p>
+  <% time = Time.now %>
+  <% if time < " 15:00:00 -0800" %>
+  O Hai
+  <%else%>
+  Go get the la
+  <%end%>
+  <br>
   <%= user_signed_in? %>
   <br>
   <%= current_user %>
@@ -9,6 +17,8 @@
   <%= current_user.id %>
   <br>
   <%= user_session %>
+  <br>
+  <%= current_user.role %>
   <br>
   <div class="col-md-8">
   <% @wikis.each do |wiki| %>
@@ -20,6 +30,7 @@
         <small>
           <%= wiki.body %>
         </small>
+
       </div>
     </div>
   <% end %>

@@ -19,6 +19,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'bootstrap'
 gem 'devise'
+gem 'pundit'
 gem 'figaro'
 gem 'pry'
 
