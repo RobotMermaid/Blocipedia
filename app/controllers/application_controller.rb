@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
    private
 
    def user_not_authorized
-      flash[:alert] = "I'm afraid I can't let you do that"
+      flash[:notice] = "I'm afraid I can't let you do that"
       redirect_to wikis_path
    end
 
