@@ -10,11 +10,11 @@ class ApplicationPolicy
   end
 
   def show?
-    @user.role === 'admin'
+    false
   end
 
   def create?
-    false
+    true
   end
 
   def new?
@@ -34,7 +34,7 @@ class ApplicationPolicy
   end
 
   def scope
-    Pundit.policy_scope!(user, record.class)
+    Pundit.policy_scope!(user, wiki.class)
   end
 
   class Scope
@@ -46,7 +46,12 @@ class ApplicationPolicy
     end
 
     def resolve
-      scope
+      if user.premium?
+        scope.all
+      else
+        scope.where(private: false)
+      end
     end
   end
+
 end

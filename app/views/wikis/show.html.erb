@@ -1,12 +1,20 @@
 
-<div class="row">
-  <ul>
-  <li class="btn btn-default" role="button"><%= link_to "Edit Wiki", edit_wiki_path %></li>
-  <li class="btn btn-default" role="button"><%= link_to "Delete Wiki", wiki_path(@wiki), :method => :delete, data: { confirm: 'Are you sure you want to delete this wiki?' } %></li>
-
-</ul>
-  <div class="col-md-8">
+<div class="row ">
+  <br>
+  <ul class="space">
+    <li class="btn btn-default" role="button"><%= link_to "Edit Wiki", edit_wiki_path %></li>
+    <li class="btn btn-default" role="button"><%= link_to "Delete Wiki", wiki_path(@wiki), :method => :delete, data: { confirm: 'Are you sure you want to delete this wiki?' } %></li>
+  </ul>
+  <div class="col-md-8 space">
     <h1><%= @wiki.title %></h1>
     <p><%= @wiki.body %></p>
+
+      <p>•<% if @wiki.private %>
+          <small>private</small>
+          <% else %>
+          <small>public</small>
+          <% end %>
+    
+    </p>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="leftspace">
+<div class="space">
   <h1> This is the wiki index </h1>
   <%= current_user.email %>
   <br>
@@ -12,16 +12,11 @@
   <br>
   <%= user_signed_in? %>
   <br>
-  <%= current_user %>
-  <br>
-  <%= current_user.id %>
-  <br>
-  <%= Faker::Name.name %>
-  <br>
-  <%= Faker::Internet.email %>
+  <%= current_user.email %>
   <br>
   <%= current_user.role %>
   <br>
+
   <div class="col-md-8">
   <% @wikis.each do |wiki| %>
     <div class="media">
@@ -32,7 +27,11 @@
         <small>
           <%= wiki.body %>
         </small>
-
+        <p>•  <% if wiki.private %>
+            <small>private</small>
+            <% else %>
+            <small>public</small>
+            <% end %> </p>
       </div>
     </div>
   <% end %>

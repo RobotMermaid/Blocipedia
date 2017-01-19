@@ -20,3 +20,6 @@
 template.html
 
 directions.rb
+
+# Ignore environment variables
+/config/application.yml
