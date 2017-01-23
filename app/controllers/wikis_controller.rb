@@ -2,8 +2,7 @@ class WikisController < ApplicationController
 
 
   def index
-    @wikis = Wiki.all
-    # authorize @wiki
+    @wikis = Wiki.all.order("created_at DESC")
   end
 
   def show
@@ -74,7 +73,7 @@ class WikisController < ApplicationController
     def downgrade
       current_user.wikis.update_all(private: false)
       current_user.update_attributes(role: "standard")
-      flash[:notice] = "You are now a standard memeber, #{current_user.email}!"
+      flash[:notice] = "You are now a standard member, #{current_user.email}!"
       redirect_to root_path
     end
 

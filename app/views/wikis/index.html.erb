@@ -1,7 +1,4 @@
 <div class="space">
-  <h1> This is the wiki index </h1>
-  <%= current_user.email %>
-  <br>
   <p>The current time is: <%= Time.now %></p>
   <% time = Time.now %>
   <% if time < " 15:00:00 -0800" %>
@@ -10,13 +7,11 @@
   Go get the la
   <%end%>
   <br>
-  <%= user_signed_in? %>
-  <br>
-  <%= current_user.email %>
+  <p> your user id is :  <%= current_user.id %> </p>
   <br>
   <%= current_user.role %>
   <br>
-  <h2>your wikis</h2>
+  <!-- <h2>your wikis</h2>
   <p>you have <%= current_user.wikis.count%> wikis</p>
   <br>
   <% current_user.wikis.each do |wiki| %>
@@ -27,36 +22,33 @@
               <small>public</small>
               <% end %> </p>
   <% end %>
-  <h2>la fin</h2>
+  <h2>la fin</h2> -->
   <br>
   <div class="col-md-8">
-
     <div>
-
       <% if current_user.premium? %>
         <%= link_to "Downgrade", charge_path(:current_user), method: :delete %>
       <% end %>
    </div>
 
-  <% @wikis.each do |wiki| %>
-    <% if !wiki.private || current_user.premium? || current_user.admin? %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to wiki.title, wiki %>
-          </h4>
-          <small>
-            <%= wiki.body %>
-          </small>
-          <p>•  <% if wiki.private %>
+   <h1>All the Wikis</h1>
+<hr />
+<% @wikis.each do |wiki| %>
+  <% if premium_view?(wiki) %>
+    <div class="media">
+      <div class="media-body">
+        <h3 class="media-heading"><%= link_to wiki.title, wiki %></h3>
+        <p><%= markdown(wiki.body) %></p>
+        <h5>Created <%= time_ago_in_words wiki.created_at %> ago by <%= wiki.user_id || current_user.id %></h5>
+        <p>•<% if wiki.private %>
               <small>private</small>
-              <% else %>
+            <% else %>
               <small>public</small>
-              <% end %> </p>
-        </div>
+            <% end %>
       </div>
-    <% end %>
+    </div>
+  <% if wiki != @wikis.last %>
+  <hr />
   <% end %>
-</div>
-
-</div>
+<% end %>
+<% end %>

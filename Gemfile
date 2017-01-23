@@ -22,6 +22,7 @@ gem 'devise'
 gem 'pundit'
 gem 'stripe'
 gem 'figaro'
+gem 'redcarpet'
 gem 'pry'
 
 group :development, :test do
