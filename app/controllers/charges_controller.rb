@@ -19,8 +19,6 @@ class ChargesController < ApplicationController
     rescue Stripe::CardError => e
       flash[:alert] = e.message
       redirect_to new_charge_path
-
-
   end
 
   def new
@@ -30,10 +28,10 @@ class ChargesController < ApplicationController
       amount: 100
     }
   end
-
-  def update
-    flash[:notice] = "So long & Thanks for all the fish, #{current_user.email}!"
+  def destroy
     current_user.update_attributes(role: "standard")
-    redirect_to root_path
+    current_user.wikis.update_all(private: false)
+    redirect_to wikis_path
   end
+
 end

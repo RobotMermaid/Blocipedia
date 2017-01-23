@@ -2,7 +2,7 @@
 
     require 'faker'
 
-    30.times do
+    10.times do
         User.create!(
         name: Faker::Name.name,
         email: Faker::Internet.email,
@@ -13,8 +13,9 @@
     50.times do
       Wiki.create!(
               title: Faker::ChuckNorris.fact,
-              body: Faker::Hipster.paragraph,
-              private: false
+              body: Faker::Hacker.say_something_smart,
+              private: false,
+              user_id: Faker::Number.between(1, 10)
       )
     end
 

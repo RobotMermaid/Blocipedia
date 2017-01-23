@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
 
   resources :wikis
-  resources :charges, only: [:new, :create]
+  resources :users, only: [:update]
+  resources :charges, only: [:new, :create, :destroy]
 
   get "welcome/index"
 

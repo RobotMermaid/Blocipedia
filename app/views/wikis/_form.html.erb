@@ -18,7 +18,7 @@
         <%= f.label :body, class: "control-label" %><br>
         <%= f.text_area :body, cols: "30", rows: "10", class: "form-control", placeholder: "Wiki Body" %>
       </div>
-      <% if current_user.role === "premium"  %>
+      <% if current_user.admin? || current_user.premium? %>
         <div class="field form-group">
           <%= f.check_box(:private) %>
           <%= f.label(:private, "Make this wiki private") %>

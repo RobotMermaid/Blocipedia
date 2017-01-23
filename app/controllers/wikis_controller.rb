@@ -70,6 +70,14 @@ class WikisController < ApplicationController
     end
   end
 
+
+    def downgrade
+      current_user.wikis.update_all(private: false)
+      current_user.update_attributes(role: "standard")
+      flash[:notice] = "You are now a standard memeber, #{current_user.email}!"
+      redirect_to root_path
+    end
+
   private
   def wiki_params
     params.require(:wiki).permit(:title, :body, :private)

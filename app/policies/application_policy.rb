@@ -10,7 +10,8 @@ class ApplicationPolicy
   end
 
   def show?
-    false
+    scope.where(:id => wiki.id).exists?
+
   end
 
   def create?
@@ -46,11 +47,7 @@ class ApplicationPolicy
     end
 
     def resolve
-      if user.premium?
-        scope.all
-      else
-        scope.where(private: false)
-      end
+        scope
     end
   end
 

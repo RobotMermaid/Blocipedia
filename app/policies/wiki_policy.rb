@@ -9,7 +9,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def index?
-    
+      #  @wikis = @user.wikis.visible_to(current_user)
       @user.role === 'premium' || @user.role === 'admin'
 
   end
