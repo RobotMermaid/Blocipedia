@@ -1,0 +1,43 @@
+<div class="space">
+  <p>The current time is: <%= Time.now %></p>
+    <% time = Time.now %>
+      <% if time < " 15:00:00 -0800" %>
+        O Hai
+      <%else%>
+        Go get the la
+  <%end%>
+  <br>
+  <p> your user email and id are :  <%= current_user.email %> |  <%= current_user.id %></p>
+  <br>
+  <%= current_user.role %>
+  <br>
+  <% @user.collaborators.each do |collaborator| %>
+    <p> Collaboration no. <%= collaborator.id %>  </p>
+  <% end %>
+  <br>
+
+
+  <h2>your wikis</h2>
+  <p>you have <%= current_user.wikis.count%> new wikis</p>
+  <% @user.wikis.each do |wiki| %>
+    <h4 class="media-heading"><%= wiki.title %></h4>
+  <% end %>
+  <br>
+
+  <% @users.each do |user| %>
+    <h4 class="media-heading"><%= user.name %> | <%= user.id %></h4>
+  <% end %>
+  <br>
+  <% current_user.wikis.each do |wiki| %>
+    <h4 class="media-heading"><%= link_to wiki.title, wiki %></h4>
+    <p><%= markdown(wiki.body) %></p>
+    <p>• <% if wiki.private %>
+          <small>private</small>
+        <% else %>
+          <small>public</small>
+        <% end %> </p>
+  <% end %>
+  <h2>la fin</h2>
+  <br>
+
+</end>

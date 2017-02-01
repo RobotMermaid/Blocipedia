@@ -1,0 +1,15 @@
+
+  <div >
+      <h1 >Select Collaborators</h1>
+      <p ><%= button_to "Go Back to Wiki", wiki_path(@wiki), method: :get %> </p>
+      <% @user.each do |user| %>
+        <div class="form-group">
+        		<h4><%= user.name %> | no. <%= user.id %></h4>
+        		<p ><%= user.email %></p>
+
+        		<p><%= button_to "Add", wiki_collaborators_path(@wiki.id), params: { user_id: user.id } %> </p>
+            <%= button_to "Remove", { :action => "destroy", :id => user.id }, :method => :delete %>
+       <% end %>
+            <br>
+        </div>
+  </div>

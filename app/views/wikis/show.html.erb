@@ -2,21 +2,31 @@
 <div class="row ">
   <br>
   <ul class="space">
-    <li class="btn btn-default" role="button"><%= link_to "Edit Wiki", edit_wiki_path %></li>
-    <li class="btn btn-default" role="button"><%= link_to "Delete Wiki", wiki_path(@wiki), :method => :delete, data: { confirm: 'Are you sure you want to delete this wiki?' } %></li>
-    <li class="btn btn-default" role="button"><%= link_to "Back to all the Wikis", wikis_path %></li>
-
+    <% if current_user.id == @wiki.user_id %>
+      <li class="btn btn-default" role="button"><%= link_to "Edit Wiki", edit_wiki_path %></li>
+      <li class="btn btn-default" role="button"><%= link_to "Delete Wiki", wiki_path(@wiki),
+      :method => :delete, data: { confirm: 'Are you sure you want to delete this wiki?' } %></li>
+    <% end %>
+    <% if current_user.premium? || current_user.admin? %>
+      <li class="btn btn-default" role="button"> <%= link_to "Edit Collaborators", new_wiki_collaborator_path(@wiki) %></li>
+      <li class="btn btn-default" role="button"><%= link_to "Back to all the Wikis", wikis_path %></li>
+    <% end %>
   </ul>
   <div class="col-md-8 space">
     <h1><%= @wiki.title %></h1>
     <p><%= @wiki.body %></p>
 
       <p>•<% if @wiki.private %>
-          <small>private</small>
+            <small>private</small>
           <% else %>
-          <small>public</small>
-          <% end %>
+            <small>public</small>
+          <% end %></p>
 
-    </p>
+    <h3>Collaborators</h3>
+      <% @wiki.collaborating_users.each do |collaborator| %>
+      <!-- how to refresh this list? -->
+        <p>  <%= collaborator.name %>  </p>
+
+      <% end %>
   </div>
 </div>

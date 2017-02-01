@@ -1,28 +1,11 @@
 <div class="space">
-  <p>The current time is: <%= Time.now %></p>
-  <% time = Time.now %>
-  <% if time < " 15:00:00 -0800" %>
-  O Hai
-  <%else%>
-  Go get the la
-  <%end%>
+
   <br>
   <p> your user id is :  <%= current_user.id %> </p>
   <br>
   <%= current_user.role %>
   <br>
-  <!-- <h2>your wikis</h2>
-  <p>you have <%= current_user.wikis.count%> wikis</p>
-  <br>
-  <% current_user.wikis.each do |wiki| %>
-          <h4 class="media-heading"><%= link_to wiki.title, wiki %></h4>
-          <p>•  <% if wiki.private %>
-              <small>private</small>
-              <% else %>
-              <small>public</small>
-              <% end %> </p>
-  <% end %>
-  <h2>la fin</h2> -->
+
   <br>
   <div class="col-md-8">
     <div>

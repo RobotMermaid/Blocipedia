@@ -2,7 +2,9 @@ class WikisController < ApplicationController
 
 
   def index
-    @wikis = Wiki.all.order("created_at DESC")
+
+     @wikis = policy_scope(Wiki)
+     @wikis = Wiki.all.order("created_at DESC")
   end
 
   def show
@@ -16,7 +18,6 @@ class WikisController < ApplicationController
   end
 
   def create
-
     @wiki = Wiki.new
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
@@ -35,6 +36,9 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @collaborator_list = @wiki.collaborating_users.each do |collaborator|
+      collaborator.name
+     end
     authorize @wiki
   end
 
@@ -45,6 +49,12 @@ class WikisController < ApplicationController
     @wiki.body = params[:wiki][:body]
     @wiki.private = params[:wiki][:private]
     # @wiki.assign_attributes(wiki_params)
+
+    if current_user.admin? || current_user.premium?
+      @wiki.private = params[:wiki][:private]
+    end
+
+    authorize @wiki
 
     if @wiki.save
       flash[:notice] = "Wiki was updated."
@@ -58,16 +68,15 @@ class WikisController < ApplicationController
 
 
   def destroy
-    @wiki = Wiki.find(params[:id])
-    authorize @wiki
-    if @wiki.destroy
-      flash[:notice] = "The wiki:\"#{@wiki.id}\" has been deleted"
-      redirect_to action: 'index'
-    else
-      flash[:alert] = "There was an error deleting the wiki"
-      render :show
-    end
-  end
+     @wiki = Wiki.find(params[:id])
+     if @wiki.destroy
+       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
+       redirect_to @wiki
+     else
+       flash.now[:alert] = "There was an error deleting the post."
+       render :show
+     end
+   end
 
 
     def downgrade

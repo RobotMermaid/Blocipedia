@@ -1,6 +1,5 @@
 <div class="space">
 <h1>Edit a Wiki</h1>
-
   <div class="row">
     <div class="col-md-4">
       <p>Guidelines for Wikis</p>
@@ -11,7 +10,16 @@
       </ul>
     </div>
     <div class="col-md-8">
+
       <%= render partial: 'form', locals: { user: @user, wiki: @wiki } %>
     </div>
+    <h2>Collaborators</h2>
+    <%= render partial: 'collaborators/collaborator', locals: {wiki: @wiki} %>
+    <% @wiki.collaborating_users.each do |collaborator| %>
+      <p class="media-heading">
+        <%= collaborator.name %> • <%= collaborator.email %>
+      </p>
+   <% end %>
   </div>
+  <br>
 </div>
