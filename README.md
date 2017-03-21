@@ -1,6 +1,6 @@
 # Blocipedia
 An application that allows users to create public and private Markdown-based wikis.  
-Navigate to the blocipedia folder and lauch rails server for localhost view.
+Navigate to the blocipedia folder and lauch rails server for localhost view.  
 #Scope of this project 
 Create a basic user scheme for a Ruby on Rails application.  
 Give the users of a Ruby on Rails application the ability to sign up for your application using the Devise gem.  
