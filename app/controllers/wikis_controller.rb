@@ -1,5 +1,5 @@
 class WikisController < ApplicationController
-
+# shouldn't be able to edit someone else's wiki if not owner even tho  you are a premium user
 
   def index
 
